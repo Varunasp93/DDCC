@@ -1,7 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
+# This file contains Python code to run the selected amplitude selection scheme
 
-# In[1]:
+__authors__ = 'Jacob Townsend and Varuna Pathirage'
 
 
 import psi4
@@ -13,15 +12,8 @@ import os
 from Amplitude_selection import *
 MLt2=0
 
-
-# In[2]:
-
-
 #Set this to the number of cores on your computer, if you run it on the head node, use 1
 psi4.set_num_threads(1)
-
-
-# In[3]:
 
 
 #This box contains all the features the CCSD module logs for us to make predictions
@@ -272,30 +264,16 @@ def Test(Foldername, occ=False, vir=False, criterion = 'none'):
     print (MAE_pert_t)
 
 
-# In[5]:
-
-
 X_train,y_train=GetAmps('Training/', criterion='La')
-
-
-# In[6]:
 
 
 # Double checking the number of amps
 
 y_train.shape[0]/np.load('All_LO.npz')['amps'].shape[0]*100
 
-
-# In[7]:
-
-
 #For adaptive weights
 
 finalfactor = calc_final_factor(X_train, y_train)
-
-
-# In[8]:
-
 
 # Scale all data before using them as features
 
@@ -309,15 +287,4 @@ for a in range(0,len(features)):
 #This trains the model with our data    
 ml=(RandomForestRegressor(n_estimators=350, n_jobs=-1).fit(X_train_scaled,y_train.reshape(-1,)))
 
-
-# In[9]:
-
-
 Test('Testing/', criterion='LA')
-
-
-# In[ ]:
-
-
-
-
