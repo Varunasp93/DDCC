@@ -1,10 +1,14 @@
 # This script allows us to select the amplitudes using score-to-bin, cluster-bins, large amplitude and electron correlation schemes
 
+__authors__ = 'Varuna Pathirage and Justin Phillips'
+
+
 # Importing packages
 import numpy as np
 import os
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.cluster import KMeans
+
 
 # This function calculates the feature weights
 def calc_final_factor(X_train, y_train):
@@ -15,7 +19,6 @@ def calc_final_factor(X_train, y_train):
     finalfactor = np.nan_to_num(corr_mat[30][:30], nan=0.0)
     
     return finalfactor
-
 
 
 # This function selects amplitudes using score-to-bins approach for training
